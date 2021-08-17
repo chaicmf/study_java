@@ -1,0 +1,45 @@
+#server
+server:
+  port: 80
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://localhost:3306/test?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true
+    username: root
+    password: 123456
+  rabbitmq:
+    host: localhost
+    port: 5672
+    virtual-host: /
+    username: guest
+    password: guest
+    listener:
+      type: simple
+      simple:
+        default-requeue-rejected: false
+        acknowledge-mode: manual
+#mq
+mq:
+  queueBinding:
+    queue: test_queue
+    dlQueue: dl-queue
+    exchange:
+      name: exchange_test
+      dlTopicExchange: dl-topic-exchange
+      type: topic
+
+    key: test
+    dlRoutingKey: dl-routing-key
+  timeout: 100
+  delay-exchange: delay_exchange
+  delay-queue-name: delayed_queue
+  delay-route-key: delayed_key
+mybatis:
+  mapper-locations: classpath*:com/cmf/mapper/impl/*.xml
+  type-aliases-package: com.cmf.mybatis.pojo,com.cmf.mybatis.dto
+
+
+
+
+

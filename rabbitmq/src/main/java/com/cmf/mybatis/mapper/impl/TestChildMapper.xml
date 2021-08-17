@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.com.cmf.mybatis.mapper.TestChildMapper">
+
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultType="com.cmf.mybatis.pojo.TestChild">
+    select  test_id testId,test_name testName,parent_id parentId
+    from test_child
+    where test_id = #{testId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from test_child
+    where test_id = #{testId,jdbcType=VARCHAR}
+  </delete>
+
+  <insert id="insert" parameterType="com.cmf.mybatis.pojo.TestChild">
+    insert into test_child (test_id, parent_id, test_name
+      )
+    values (#{testId,jdbcType=VARCHAR}, #{parentId,jdbcType=VARCHAR}, #{testName,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.cmf.mybatis.pojo.TestChild">
+    insert into test_child
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="testId != null">
+        test_id,
+      </if>
+      <if test="parentId != null">
+        parent_id,
+      </if>
+      <if test="testName != null">
+        test_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="testId != null">
+        #{testId,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null">
+        #{parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="testName != null">
+        #{testName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.cmf.mybatis.pojo.TestChild">
+    update test_child
+    <set>
+      <if test="parentId != null">
+        parent_id = #{parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="testName != null">
+        test_name = #{testName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where test_id = #{testId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cmf.mybatis.pojo.TestChild">
+    update test_child
+    set parent_id = #{parentId,jdbcType=VARCHAR},
+      test_name = #{testName,jdbcType=VARCHAR}
+    where test_id = #{testId,jdbcType=VARCHAR}
+  </update>
+
+</mapper>

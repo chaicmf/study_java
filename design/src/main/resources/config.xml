@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <className>com.cmf.design.entities.ContractFactory</className>
+    <photo>com.cmf.design.photo.TypeFactory</photo>
+    <phone>com.cmf.design.AbstractFactory.factory.AndroidFactory</phone>
+</config>
